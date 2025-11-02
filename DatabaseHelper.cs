@@ -71,6 +71,48 @@ BEGIN
         Value FLOAT NULL
     );
 END
+
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name='Patients')
+BEGIN
+    CREATE TABLE Patients(
+        PatientID INT IDENTITY PRIMARY KEY,
+        FullName NVARCHAR(100),
+        Gender NVARCHAR(10),
+        DateOfBirth DATE,
+        Address NVARCHAR(200),
+        Phone NVARCHAR(20)
+    );
+END
+
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name='Doctors')
+BEGIN
+    CREATE TABLE Doctors (
+        DoctorID INT IDENTITY PRIMARY KEY,
+        FullName NVARCHAR(100),
+        Department NVARCHAR(100),
+        Phone NVARCHAR(20)
+    );
+END
+
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name='NextOfKin')
+BEGIN
+    CREATE TABLE NextOfKin (
+        KinID INT IDENTITY PRIMARY KEY,
+        PatientID INT, 
+        FullName NVARCHAR(100),
+        Relation NVARCHAR(50),
+        Phone NVARCHAR(20)
+    );
+END
+
+IF NOT EXISTS (SELECT 1 FROM sys.tables WHERE name='Parameters')
+BEGIN
+    CREATE TABLE Parameters (
+        ParameterID INT IDENTITY PRIMARY KEY,
+        Name NVARCHAR(50),
+        Unit NVARCHAR(20)
+    );
+END
 ";
             using (var cmd = new SqlCommand(sql, openConn))
             {
@@ -79,3 +121,4 @@ END
         }
     }
 }
+
