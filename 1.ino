@@ -47,7 +47,7 @@ const int HX_SCK4 = 26;
 
 // HX711 objects: index 0..3 => F1,F2,F3,F4
 HX711 hx1, hx2, hx3, hx4;
-float scaleFactor[4] = {1,1,1,1};
+float scaleFactor[4] = {47.255798,50.090199,46.726501,46.205700};
 long offsetRaw[4] = { 0, 0, 0, 0 };
 
 TFT_eSPI tft = TFT_eSPI();
